@@ -1,6 +1,12 @@
+#main file from where i'll gonna call everything
+
+
+
+#imported some files needed for displayig the board
 import pygame
 import sys
 
+#attributes from the files i created
 from const import *
 from game import Game
 
@@ -17,10 +23,12 @@ class Main:
     
     
     def mainloop(self):
-        #pass
+        #now I don't have to self.game/screen simply call screen and game
+        game=self.game
+        screen=self.screen
 
         while True:#kind of infinite loop
-            self.game.show_bg(self.screen)
+            game.show_bg(screen)
             for event in pygame.event.get():
                 if event.type == pygame.QUIT:
                     pygame.quit()
@@ -32,6 +40,6 @@ class Main:
             pygame.display.update()
         #print('world')
     
-
+#calling the main
 main = Main()
 main.mainloop()
