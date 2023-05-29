@@ -1,0 +1,9 @@
+
+ROW=8
+COL=8
+
+WIDTH=800
+HEIGHT=800
+
+Sqsize = HEIGHT // ROW
+
