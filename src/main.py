@@ -28,6 +28,7 @@ class Main:
 
 
 
+
             pygame.display.update()
         #print('world')
     
