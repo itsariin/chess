@@ -18,7 +18,8 @@ class Main:
         pygame.init()
         self.screen=pygame.display.set_mode((WIDTH,HEIGHT))
         pygame.display.set_caption('Chess')
-        self.game = Game() #new attribute reference from our main class to our game class
+        self.game = Game()
+        #new attribute reference from our main class to our game class
         #print('hello')
     
     
@@ -29,6 +30,7 @@ class Main:
 
         while True:#kind of infinite loop
             game.show_bg(screen)
+            game.show_pieces(screen)
             for event in pygame.event.get():
                 if event.type == pygame.QUIT:
                     pygame.quit()
