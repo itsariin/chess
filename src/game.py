@@ -13,6 +13,7 @@ class Game:
         self.dragger = Dragger()
 
 
+    #BLIT METHODS
     def show_bg(self, surface):
         #pass
         for row in range(ROW):
