@@ -92,3 +92,10 @@ class Main:
 main = Main()
 main.mainloop()
 
+  #print(dragger.mouseY,clicked_row)
+  #print(dragger.mouseX, clicked_col)
+
+#difference between clicked_row/col and mouseX and mouseY
+                    # so if i click on the left most rook i will get 0 and 0
+                    # when i click on the right most rook i will get 7 and 7 THESE ARE CLICKED_ROW/COL
+                    # And dragger.mouseX/Y are some different coordinates

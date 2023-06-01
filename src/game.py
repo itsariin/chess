@@ -29,7 +29,13 @@ class Game:
 
                 pygame.draw.rect(surface, color, rect)
 
+    # print(dragger.mouseY,clicked_row)
+    # print(dragger.mouseX, clicked_col)
 
+    # difference between clicked_row/col and mouseX and mouseY
+    # so if i click on the left most rook i will get 0 and 0
+    # when i click on the right most rook i will get 7 and 7 THESE ARE CLICKED_ROW/COL
+    # And dragger.mouseX/Y are some different coordinates
     def show_pieces(self,surface):
         for row in range(ROW):
             for col in range(COL):
@@ -42,17 +48,19 @@ class Game:
 
                     #All piece except the dragger piece
                     if piece is not self.dragger.piece:
+                        piece.set_texture(size=80)# I actually didn't need to send this size as we have already set it default I just want ot be explicit
                         img = pygame.image.load(piece.texture)
                         img_center = col * Sqsize + Sqsize // 2, row * Sqsize + Sqsize // 2
                         piece.texture_rect = img.get_rect(center=img_center)
                         surface.blit(img, piece.texture_rect)
 
 
-#difference between clicked_row/col and mouseX and mouseY
-                         #print(dragger.mouseY,clicked_row)
+
+  #print(dragger.mouseY,clicked_row)
                          #print(dragger.mouseX, clicked_col)
+
+#difference between clicked_row/col and mouseX and mouseY
                     # so if i click on the left most rook i will get 0 and 0
                     # when i click on the right most rook i will get 7 and 7 THESE ARE CLICKED_ROW/COL
                     # And dragger.mouseX/Y are some different coordinates
-
 
