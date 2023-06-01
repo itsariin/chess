@@ -37,9 +37,22 @@ class Game:
                 if self.board.squares[row][col].has_piece():
                     piece = self.board.squares[row][col].piece
 
-                    img = pygame.image.load(piece.texture)
-                    img_center = col * Sqsize + Sqsize // 2, row * Sqsize + Sqsize // 2
-                    piece.texture_rect = img.get_rect(center=img_center)
-                    surface.blit(img, piece.texture_rect)
+                    # so if you see we are blitting all piece but we have to blit all except
+                    # the one which we are dragging
+
+                    #All piece except the dragger piece
+                    if piece is not self.dragger.piece:
+                        img = pygame.image.load(piece.texture)
+                        img_center = col * Sqsize + Sqsize // 2, row * Sqsize + Sqsize // 2
+                        piece.texture_rect = img.get_rect(center=img_center)
+                        surface.blit(img, piece.texture_rect)
+
+
+#difference between clicked_row/col and mouseX and mouseY
+                         #print(dragger.mouseY,clicked_row)
+                         #print(dragger.mouseX, clicked_col)
+                    # so if i click on the left most rook i will get 0 and 0
+                    # when i click on the right most rook i will get 7 and 7 THESE ARE CLICKED_ROW/COL
+                    # And dragger.mouseX/Y are some different coordinates
 
 
