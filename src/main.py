@@ -73,7 +73,10 @@ class Main:
                 elif event.type == pygame.MOUSEMOTION:
                     if dragger.dragging:
                         dragger.updatemouse(event.pos)
+                        game.show_bg(screen)
+                        game.show_pieces(screen)
                         dragger.update_blit(screen)
+
                 #releasing the button
                 elif event.type == pygame.MOUSEBUTTONUP:
                     dragger.undrag_piece()
@@ -91,11 +94,3 @@ class Main:
 #calling the main
 main = Main()
 main.mainloop()
-
-  #print(dragger.mouseY,clicked_row)
-  #print(dragger.mouseX, clicked_col)
-
-#difference between clicked_row/col and mouseX and mouseY
-                    # so if i click on the left most rook i will get 0 and 0
-                    # when i click on the right most rook i will get 7 and 7 THESE ARE CLICKED_ROW/COL
-                    # And dragger.mouseX/Y are some different coordinates
