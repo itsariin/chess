@@ -1,6 +1,7 @@
 from const import *
 from square import Square
 from piece import *
+from move import Move
 
 
 class Board:
@@ -12,8 +13,62 @@ class Board:
         self._add_pieces('white')
         self._add_pieces('black')
 
-    #these methods will just be called in our Board class
-    #the reason for using _brfore them is to just show that these are private methods
+    def calc_moves(self,piece,row,col):
+        '''
+
+        This is going to calculate all the possible and (valid) moves
+        of a specific piece on a specific position
+
+        '''
+        def knight_moves():
+            # so if our Knight is in the center the possible moves it has are '8'
+            possible_moves = [
+                (row-2, col+1),
+                (row-2, col-1),
+                (row+2, col+1),
+                (row+2, col-1),
+                (row-1, col+2),
+                (row+1, col+2),
+                (row-1, col-2),
+                (row+1, col-2),
+            ]
+            for possible_moves in possible_moves:
+                possible_moves_row, possible_moves_col = possible_moves
+                if Square.in_range(possible_moves_row, possible_moves_col):
+                    if self.squares[possible_moves_row][possible_moves_col ].isempty_or_rival(piece.color):
+                        #Creating Squares of the new move
+                        initial = Square(row,col)
+                        final = Square(possible_moves_row,possible_moves_col )  #piece=piece
+                        #Creatin new Move
+                        move = Move(initial,final)
+                        piece.add_move(move) #Appending new Valid Moves
+
+
+
+
+        #I can also use piece.name == 'Pawn' instead of isinstance
+        if isinstance(piece, Pawn):
+            pass
+
+        elif isinstance(piece, Knight):
+            knight_moves
+
+        elif isinstance(piece, Bishop):
+            pass
+
+        elif isinstance(piece, Rook):
+            pass
+
+        elif isinstance(piece, Queen):
+            pass
+
+        elif isinstance(piece, King):
+            pass
+
+    '''
+    ->these methods will just be called in our Board class
+    ->the reason for using _brfore them is to just show that these are private methods
+    '''
     def _create(self):
         for row in range(ROW):
             for col in range(COL):
@@ -57,3 +112,25 @@ class Board:
 #b = Board()
 #b._create()
 
+'''
+Asthetic Method
+
+if i create an instance of Square class 
+
+s = square()
+#Now with s i can call has_piece
+s.has_piece
+
+#Now a Asthetic Method let me call method inside of that class without an "object"
+I just need the class itself So, I can do 
+Square.in_range() And i can call @staticmethod
+                                    def in_range(*args):
+                                        for arg in args:
+                                            if arg < 0 or arg > 7:
+                                                return False
+                                        return True
+without creating any object or without any need of object
+'''
+#print(Square.in_range(4,2,5,4))
+
+#Basically we can call the method with the class not with an instance
