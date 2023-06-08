@@ -13,31 +13,57 @@ class Board:
         self._add_pieces('white')
         self._add_pieces('black')
 
-    def calc_moves(self,piece,row,col):
+    # def calc_moves(self,piece,row,col):
+    #
+    #     def knight_moves():
+    #         # so if our Knight is in the center the possible moves it has are '8'
+    #         possible_moves = [
+    #             (row-2, col+1),
+    #             (row-2, col-1),
+    #             (row+2, col+1),
+    #             (row+2, col-1),
+    #             (row-1, col+2),
+    #             (row+1, col+2),
+    #             (row-1, col-2),
+    #             (row+1, col-2),
+    #         ]
+    #         for possible_move in possible_moves:
+    #             possible_move_row, possible_move_col = possible_move
+    #
+    #             if Square.in_range(possible_move_row, possible_move_col):
+    #                 if self.squares[possible_move_row][possible_move_col ].isempty_or_rival(piece.color):
+    #                     #Creating Squares of the new move
+    #                     initial = Square(row, col)
+    #                     final = Square(possible_move_row,possible_move_col)  #piece=piece
+    #                     #Creatin new Move
+    #                     move = Move(initial,final)
+    #                     piece.add_move(move) #Appending new Valid Moves
 
-        def knight_moves():
-            # so if our Knight is in the center the possible moves it has are '8'
-            possible_moves = [
-                (row-2, col+1),
-                (row-2, col-1),
-                (row+2, col+1),
-                (row+2, col-1),
-                (row-1, col+2),
-                (row+1, col+2),
-                (row-1, col-2),
-                (row+1, col-2),
-            ]
-            for possible_move in possible_moves:
-                possible_move_row, possible_move_col = possible_move
+        def calc_moves(self, piece, row, col):
 
-                if Square.in_range(possible_move_row, possible_move_col):
-                    if self.squares[possible_move_row][possible_move_col ].isempty_or_rival(piece.color):
-                        #Creating Squares of the new move
-                        initial = Square(row, col)
-                        final = Square(possible_move_row,possible_move_col)  #piece=piece
-                        #Creatin new Move
-                        move = Move(initial,final)
-                        piece.add_move(move) #Appending new Valid Moves
+            def knight_moves():
+                # so if our Knight is in the center the possible moves it has are '8'
+                possible_moves = [
+                    (row - 2, col + 1),
+                    (row - 2, col - 1),
+                    (row + 2, col + 1),
+                    (row + 2, col - 1),
+                    (row - 1, col + 2),
+                    (row + 1, col + 2),
+                    (row - 1, col - 2),
+                    (row + 1, col - 2),
+                ]
+                for possible_move in possible_moves:
+                    possible_move_row, possible_move_col = possible_move
+
+                    if Square.in_range(possible_move_row, possible_move_col):
+                        if self.squares[possible_move_row][possible_move_col].isempty_or_rival(piece.color):
+                            # Creating Squares of the new move
+                            initial = Square(row, col)
+                            final = Square(possible_move_row, possible_move_col)  # piece=piece
+                            # Creatin new Move
+                            move = Move(initial, final)
+                            piece.add_move(move)  # Appending new Valid Moves
 
 
 
