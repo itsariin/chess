@@ -1,7 +1,5 @@
 #main file from where i'll gonna call everything
 
-
-
 #imported some files needed for displayig the board
 import pygame
 import sys
@@ -9,8 +7,8 @@ import sys
 #attributes from the files i created
 from const import *
 from game import Game
-
-
+from square import Square
+from move import Move
 
 class Main:
     
@@ -26,8 +24,8 @@ class Main:
     
     def mainloop(self):
         #now I don't have to self.game/screen simply call screen and game
+        screen = self.screen
         game=self.game
-        screen=self.screen
         board=self.game.board
         #reference for dragger
         dragger=self.game.dragger
@@ -103,3 +101,7 @@ class Main:
 #calling the main
 main = Main()
 main.mainloop()
+
+
+
+

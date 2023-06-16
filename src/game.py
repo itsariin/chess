@@ -25,8 +25,7 @@ class Game:
                     color = (119,154, 88)#light green
 
 
-                rect = (row*Sqsize,col*Sqsize,Sqsize,Sqsize)
-
+                rect = (col * Sqsize, row * Sqsize, Sqsize, Sqsize)
                 pygame.draw.rect(surface, color, rect)
 
     # print(dragger.mouseY,clicked_row)
@@ -63,7 +62,7 @@ class Game:
             #loop all valid moves
             for move in piece.moves:
                 #color
-                color = '#C86464' if (move.final.row + move.final.col) % 2 ==0 else '#C684646'
+                color = (180, 180, 180) if (move.final.row + move.final.col) % 2 ==0 else (90, 90, 180)
                 #rect
                 rect = (move.final.col * Sqsize, move.final.row * Sqsize, Sqsize, Sqsize )
                 #blit

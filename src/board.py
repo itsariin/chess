@@ -14,12 +14,7 @@ class Board:
         self._add_pieces('black')
 
     def calc_moves(self,piece,row,col):
-        '''
 
-        This is going to calculate all the possible and (valid) moves
-        of a specific piece on a specific position
-
-        '''
         def knight_moves():
             # so if our Knight is in the center the possible moves it has are '8'
             possible_moves = [
@@ -30,15 +25,16 @@ class Board:
                 (row-1, col+2),
                 (row+1, col+2),
                 (row-1, col-2),
-                (row+1, col-2)
+                (row+1, col-2),
             ]
-            for possible_moves in possible_moves:
-                possible_moves_row, possible_moves_col = possible_moves
-                if Square.in_range(possible_moves_row, possible_moves_col):
-                    if self.squares[possible_moves_row][possible_moves_col ].isempty_or_rival(piece.color):
+            for possible_move in possible_moves:
+                possible_move_row, possible_move_col = possible_move
+
+                if Square.in_range(possible_move_row, possible_move_col):
+                    if self.squares[possible_move_row][possible_move_col ].isempty_or_rival(piece.color):
                         #Creating Squares of the new move
-                        initial = Square(row,col)
-                        final = Square(possible_moves_row,possible_moves_col )  #piece=piece
+                        initial = Square(row, col)
+                        final = Square(possible_move_row,possible_move_col)  #piece=piece
                         #Creatin new Move
                         move = Move(initial,final)
                         piece.add_move(move) #Appending new Valid Moves
@@ -51,7 +47,7 @@ class Board:
             pass
 
         elif isinstance(piece, Knight):
-            knight_moves
+            knight_moves()
 
         elif isinstance(piece, Bishop):
             pass
