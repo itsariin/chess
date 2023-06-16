@@ -127,6 +127,3 @@ Square.in_range() And i can call @staticmethod
                                         return True
 without creating any object or without any need of object
 '''
-#print(Square.in_range(4,2,5,4))
-
-#Basically we can call the method with the class not with an instance
