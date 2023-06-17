@@ -8,22 +8,21 @@ class Move:
         # print(Square.in_range(4,2,5,4))
 
         # Basically we can call the method with the class not with an instance
-'''
-Asthetic Method
+    # def __str__(self):
+    #     s = ''
+    #     s+= f'({self.initial.col}, {self.initial.row})'
+    #     s += f'->({self.final.col}, {self.final.row})'
+    #     return s
 
-if i create an instance of Square class 
+        #dunder method these are just some special methods that python has
 
-s = square()
-#Now with s i can call has_piece
-s.has_piece
+    # def __eq__(self, other):
+    #     return self.initial == other.initial and self.final == other.final
+    def __str__(self):
+        s = ''
+        s += f'({self.initial.col}, {self.initial.row})'
+        s += f' -> ({self.final.col}, {self.final.row})'
+        return s
 
-#Now a Asthetic Method let me call method inside of that class without an "object"
-I just need the class itself So, I can do 
-Square.in_range() And i can call @staticmethod
-                                    def in_range(*args):
-                                        for arg in args:
-                                            if arg < 0 or arg > 7:
-                                                return False
-                                        return True
-without creating any object or without any need of object
-'''
+    def __eq__(self, other):
+        return self.initial == other.initial and self.final == other.final

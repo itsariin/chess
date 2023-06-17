@@ -20,10 +20,10 @@ class Board:
 
         #console
         self.squares[initial.row][initial.col].piece = None
-        self.squares[final.row][final.col].piece = None
+        self.squares[final.row][final.col].piece = piece
 
         #move
-        piece.moves = True
+        piece.moved = True
 
         #clear valid moves
         piece.clear_moves()
@@ -38,10 +38,7 @@ class Board:
 
         def pawn_moves():
             #steps
-            if piece.moved:
-                steps=1
-            else:
-                steps=2
+            steps = 1 if piece.moved else 2
 
 
             #vertical moves
@@ -50,8 +47,8 @@ class Board:
             for possible_move_row in range(start,end, piece.dir):
                 if Square.in_range(possible_move_row):
                     if self.squares[possible_move_row][col].isempty():
-                        initial = Square(row,col)
-                        final = Square(possible_move_row,col)
+                        initial = Square(row, col)
+                        final = Square(possible_move_row, col)
                         move = Move(initial,final)
                         piece.add_move(move)
                     else:
@@ -63,7 +60,6 @@ class Board:
             #Diagonal moves
             possible_move_row = row + piece.dir
             possible_move_cols = [col-1, col+1]
-
             for possible_move_col in possible_move_cols:
                 if Square.in_range(possible_move_row, possible_move_col):
                     if self.squares[possible_move_row][possible_move_col].has_rival_piece(piece.color):
