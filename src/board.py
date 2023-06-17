@@ -76,6 +76,11 @@ class Board:
                         move = Move(initial,final)
                         piece.add_move(move) #Appending new Valid Moves
 
+        def straightlines_moves(increments):
+            for increment in increments:
+                row_increment, col_increment = increment
+                possible_move_row = row + row_increment
+                possible_move_col = col + col_increment
 
 
 
@@ -87,13 +92,32 @@ class Board:
             knight_moves()
 
         elif isinstance(piece, Bishop):
-            pass
+            straightlines_moves([
+                (-1,1), #ur
+                (-1,-1),#ul
+                (1, -1),#dl
+                (1, 1),#dr
+            ])
 
         elif isinstance(piece, Rook):
-            pass
+            straightlines_moves([
+                (-1,0),
+                (1,0),
+                (0,1),
+                (0,-1),
+            ])
 
         elif isinstance(piece, Queen):
-            pass
+            straightlines_moves([
+                (-1, 1),  # ur
+                (-1, -1),  # ul
+                (1, -1),  # dl
+                (1, 1),  # dr
+                (-1, 0),
+                (1, 0),
+                (0, 1),
+                (0, -1),
+            ])
 
         elif isinstance(piece, King):
             pass
@@ -117,7 +141,7 @@ class Board:
         #Pawns
         for col in range(COL):
             self.squares[row_pawn][col] = Square(row_pawn, col, Pawn(color))
-            #self.squares[5][0] = Square(5,0, Pawn(color))
+            #self.squares[5][1] = Square(5,1, Pawn(color))
 
         #Knights
         self.squares[row_other][1] = Square(row_other,1,Knight(color))
