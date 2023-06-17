@@ -33,8 +33,11 @@ class Main:
         while True:#kind of infinite loop
             #show methods
             game.show_bg(screen)
+            game.show_last_moves(screen)
             game.show_moves(screen)
             game.show_pieces(screen)
+
+            game.show_hover(screen)
 
             #for the fluency
             if dragger.dragging:
@@ -66,22 +69,31 @@ class Main:
                     #if clicked square has a piece just asking
                     if board.squares[clicked_row][clicked_col].has_piece():#remeber we created this has_piece method already in the square class
                         piece = board.squares[clicked_row][clicked_col].piece
-                        board.calc_moves(piece, clicked_row, clicked_col)
-                        dragger.save_initial(event.pos)#in case we did a bad move so we have to comeback to the original position
-                        dragger.drag_piece(piece)
-                        #Show Methods
-                        game.show_bg(screen)
-                        game.show_moves(screen)
-                        game.show_pieces(screen)
+                        # valid piece color
+                        if piece.color == game.next_player:
+                            board.calc_moves(piece, clicked_row, clicked_col)
+                            dragger.save_initial(event.pos)  # in case we did a bad move so we have to comeback to the original position
+                            dragger.drag_piece(piece)
+                            # Show Methods
+                            game.show_bg(screen)
+                            game.show_last_moves(screen)
+                            game.show_moves(screen)
+                            game.show_pieces(screen)
                 #dragging/movingthecursor MOUSE MOTION
                 # we are checking if we are actually dragging a piece
                 elif event.type == pygame.MOUSEMOTION:
+                    motion_row = event.pos[1] // Sqsize
+                    motion_col = event.pos[0] // Sqsize
+
+                    game.set_hover(motion_row, motion_col)
                     if dragger.dragging:
                         dragger.updatemouse(event.pos)
                         #show methods
                         game.show_bg(screen)
+                        game.show_last_moves(screen)
                         game.show_moves(screen)
                         game.show_pieces(screen)
+                        game.show_hover(screen)
                         dragger.update_blit(screen)
 
                 #releasing the button
@@ -100,7 +112,9 @@ class Main:
                             board.move(dragger.piece, move)
                             #draw show methods
                             game.show_bg(screen)
+                            game.show_last_moves(screen)
                             game.show_pieces(screen)
+                            game.next_turn()
                     dragger.undrag_piece()
                 #Qutting the application
                 elif event.type == pygame.QUIT:
