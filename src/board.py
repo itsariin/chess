@@ -107,6 +107,32 @@ class Board:
                     possible_move_row = possible_move_row + row_increment
                     possible_move_col = possible_move_col + col_increment
 
+        def king_moves():
+            adjacents = [
+                (row - 1, col + 0),
+                (row + 1, col + 0),
+                (row + 0, col + 1),
+                (row + 0, col - 1),
+                (row - 1, col - 1),
+                (row + 1, col + 1),
+                (row - 1, col + 1),
+                (row + 1, col - 1),
+
+            ]
+            for possible_move in adjacents:
+                possible_move_row, possible_move_col = possible_move
+
+                if Square.in_range(possible_move_row, possible_move_col):
+                    if self.squares[possible_move_row][possible_move_col].isempty_or_rival(piece.color):
+                        # Creating Squares of the new move
+                        initial = Square(row, col)
+                        final = Square(possible_move_row, possible_move_col)  # piece=piece
+                        # Creatin new Move
+                        move = Move(initial, final)
+                        piece.add_move(move)  # Appending new Valid Moves
+
+
+
         #I can also use piece.name == 'Pawn' instead of isinstance
         if isinstance(piece, Pawn):
             pawn_moves()
@@ -143,7 +169,7 @@ class Board:
             ])
 
         elif isinstance(piece, King):
-            pass
+            king_moves()
 
     '''
     ->these methods will just be called in our Board class
