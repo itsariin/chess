@@ -82,6 +82,22 @@ class Board:
                 possible_move_row = row + row_increment
                 possible_move_col = col + col_increment
 
+                #while true
+                if Square.in_range(possible_move_row, possible_move_col):
+
+                    initial = Square(row, col)
+                    final = Square(possible_move_row, possible_move_col)
+                    move = Move(initial,final)
+
+                    #empty
+                    if self.squares[possible_move_row][possible_move_col].isempty():
+                         #create a new move
+                         pass
+
+                    #has enemy piece
+                    if self.squares[possible_move_row][possible_move_col].has_rival_piece(piece.color):
+                        #create a new move
+                        pass
 
 
         #I can also use piece.name == 'Pawn' instead of isinstance

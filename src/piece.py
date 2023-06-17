@@ -63,4 +63,12 @@ class King(Piece):
         super().__init__('king', color,1000.0)
 
 
+'''
+Asthetic Method
 
+if i create an instance of Square class 
+
+s = sq
+                                        return True
+without creating any object or without any need of object
+'''
