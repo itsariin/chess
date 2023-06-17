@@ -82,23 +82,30 @@ class Board:
                 possible_move_row = row + row_increment
                 possible_move_col = col + col_increment
 
-                #while true
-                if Square.in_range(possible_move_row, possible_move_col):
+                while True:
+                    if Square.in_range(possible_move_row, possible_move_col):
+                        initial = Square(row, col)
+                        final = Square(possible_move_row, possible_move_col)
+                        move = Move(initial, final)
 
-                    initial = Square(row, col)
-                    final = Square(possible_move_row, possible_move_col)
-                    move = Move(initial,final)
+                        # empty
+                        if self.squares[possible_move_row][possible_move_col].isempty():
+                            # append a new move
+                            piece.add_move(move)
 
-                    #empty
-                    if self.squares[possible_move_row][possible_move_col].isempty():
-                         #create a new move
-                         pass
-
-                    #has enemy piece
-                    if self.squares[possible_move_row][possible_move_col].has_rival_piece(piece.color):
-                        #create a new move
-                        pass
-
+                        # has enemy piece
+                        if self.squares[possible_move_row][possible_move_col].has_rival_piece(piece.color):
+                            # append a new move
+                            piece.add_move(move)
+                            break
+                        # has team piece
+                        if self.squares[possible_move_row][possible_move_col].has_team_piece(piece.color):
+                            break
+                    else:
+                        break
+                    #increments
+                    possible_move_row = possible_move_row + row_increment
+                    possible_move_col = possible_move_col + col_increment
 
         #I can also use piece.name == 'Pawn' instead of isinstance
         if isinstance(piece, Pawn):
@@ -171,9 +178,11 @@ class Board:
         # Rooks
         self.squares[row_other][0] = Square(row_other, 0, Rook(color))
         self.squares[row_other][7] = Square(row_other, 7, Rook(color))
+        #self.squares[4][4] = Square(4, 4, Rook(color))
 
         # Queen
         self.squares[row_other][3] = Square(row_other, 3, Queen(color))
+        #self.squares[5][4] = Square(5, 4, Queen(color))
 
 
         # King

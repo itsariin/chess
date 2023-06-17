@@ -62,7 +62,7 @@ class Game:
             #loop all valid moves
             for move in piece.moves:
                 #color
-                color = (194,30,40) if (move.final.row + move.final.col) % 2 ==0 else (194,30,40)
+                color = (194,30,40) if (move.final.row + move.final.col) % 2 ==0 else (160,10,30)
                 #rect
                 rect = (move.final.col * Sqsize, move.final.row * Sqsize, Sqsize, Sqsize )
                 #blit
