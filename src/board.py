@@ -15,6 +15,43 @@ class Board:
 
     def calc_moves(self,piece,row,col):
 
+        def pawn_moves():
+            #steps
+            if piece.moved:
+                steps=1
+            else:
+                steps=2
+
+
+            #vertical moves
+            start = row + piece.dir
+            end = row + (piece.dir * (1+steps))
+            for possible_move_row in range(start,end, piece.dir):
+                if Square.in_range(possible_move_row):
+                    if self.squares[possible_move_row][col].isempty():
+                        initial = Square(row,col)
+                        final = Square(possible_move_row,col)
+                        move = Move(initial,final)
+                        piece.add_move(move)
+                    else:
+                        break
+                else:
+                    break
+
+
+            #Diagonal moves
+            possible_move_row = row + piece.dir
+            possible_move_cols = [col-1, col+1]
+
+            for possible_move_col in possible_move_cols:
+                if Square.in_range(possible_move_row, possible_move_col):
+                    if self.squares[possible_move_row][possible_move_col].has_rival_piece(piece.color):
+                        initial = Square(row, col)
+                        final = Square(possible_move_row, possible_move_col)
+
+                        move =Move(initial, final)
+
+                        piece.add_move(move)
         def knight_moves():
             # so if our Knight is in the center the possible moves it has are '8'
             possible_moves = [
@@ -44,7 +81,7 @@ class Board:
 
         #I can also use piece.name == 'Pawn' instead of isinstance
         if isinstance(piece, Pawn):
-            pass
+            pawn_moves()
 
         elif isinstance(piece, Knight):
             knight_moves()
@@ -80,11 +117,12 @@ class Board:
         #Pawns
         for col in range(COL):
             self.squares[row_pawn][col] = Square(row_pawn, col, Pawn(color))
+            #self.squares[5][0] = Square(5,0, Pawn(color))
 
         #Knights
         self.squares[row_other][1] = Square(row_other,1,Knight(color))
         self.squares[row_other][6] = Square(row_other, 6, Knight(color))
-        #self.squares[3][3]= Square(3,3,Knight(color))
+        #self.squares[4][4]= Square(4,4,Knight(color))
 
         #Bishops
         self.squares[row_other][2] = Square(row_other,2,Bishop(color))
