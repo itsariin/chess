@@ -9,10 +9,31 @@ class Board:
         # list of 8 zeros for each column
         self.squares = [[0, 0, 0, 0, 0, 0, 0, 0] for col in range(COL)]
         # print(self.squares) this was used to see that
+        self.last_move = None
         self._create()
         self._add_pieces('white')
         self._add_pieces('black')
 
+    def move(self, piece, move):
+        initial = move.initial
+        final = move.final
+
+        #console
+        self.squares[initial.row][initial.col].piece = None
+        self.squares[final.row][final.col].piece = None
+
+        #move
+        piece.moves = True
+
+        #clear valid moves
+        piece.clear_moves()
+
+        #setting the last move
+        self.last_move = move
+
+
+    def valid_move(self, piece, move):
+        return move in piece.moves
     def calc_moves(self,piece,row,col):
 
         def pawn_moves():
